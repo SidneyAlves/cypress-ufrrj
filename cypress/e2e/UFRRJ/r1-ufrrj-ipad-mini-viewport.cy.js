@@ -4,6 +4,9 @@ const baseUrl = 'http://r1.ufrrj.br/sisu/convocacao-sisu/'
 context('Testes SISU-UFRRJ', () => {
 
     beforeEach(() => {
+        cy.on('uncaught:exception', (err, runnable) => {
+            return false;
+        })
       cy.viewport('ipad-mini')
       cy.visit(baseUrl)
     })
@@ -15,9 +18,8 @@ context('Testes SISU-UFRRJ', () => {
     })
 
     it('Teste de compatibilidade da ISO 25010:2023 (valida se da tela do SISU é possível abrir o sistema de matrícula)', () => {
-        cy.contains('de forma remota (on-line)').invoke('removeAttr', 'target').click()
-        cy.contains('www.itr.ufrrj.br/matricula').invoke('removeAttr', 'target').click()
-        cy.url().should('eq', 'https://itr.ufrrj.br/prograd/matricula/')
+        cy.contains('http://sigps.ufrrj.br/').invoke('removeAttr', 'target').click()
+        cy.url().should('include', 'https://sso.acesso.gov.br/login')
     })
 
     const quantidadeDeCursosPorCampus = {
@@ -37,7 +39,7 @@ context('Testes SISU-UFRRJ', () => {
         })
     })
 
-    const arquivoSistemasDeInformacao = 'Sistema_informacao_Seropedica'
+    const arquivoSistemasDeInformacao = 'Sistema_de_informacao_Seropedica'
 
     it('Teste de adequação funcional da ISO 25010:2023 (valida se é carregada a lista de aprovados no curso de Sistemas de Informação do campus de Seropédica)', () => {
         cy.get('#container').each(() => {
