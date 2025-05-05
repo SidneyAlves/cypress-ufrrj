@@ -7,6 +7,7 @@ context('Testes SISU-UFRRJ', () => {
         cy.on('uncaught:exception', (err, runnable) => {
             return false;
         })
+      cy.viewport(1920, 1080);
       cy.visit(baseUrl)
     })
 

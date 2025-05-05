@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+const {sigaa_login, sigaa_senha} = Cypress.env()
 const baseUrl = 'https://sigaa.ufrrj.br/sigaa/verTelaLogin.do'
 
 context('Testes SIGAA-UFRRJ', () => {
